@@ -17,7 +17,7 @@
     - Non Admin User : `username:user, password:user`
 
 ## Frontend
-- Backend is written in react programming language
+- Frontend is written in react programming language
 - There are different views defined for login, register and allUsers screen.
 
 ## Run
