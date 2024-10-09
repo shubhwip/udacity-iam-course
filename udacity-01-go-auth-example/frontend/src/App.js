@@ -4,6 +4,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Profile from './components/Profile';
 import AdminDashboard from './components/AdminDashboard';
+import WarehouseManagersDashboard from './components/WarehouseManagers';
 
 function App() {
   return (
@@ -33,6 +34,14 @@ function App() {
             element={
               <AdminRoute>
                 <AdminDashboard />
+              </AdminRoute>
+            } 
+          />
+          <Route 
+            path="/admin/warehousemanagers" 
+            element={
+              <AdminRoute>
+                <WarehouseManagersDashboard />
               </AdminRoute>
             } 
           />

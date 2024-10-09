@@ -53,7 +53,7 @@ func main() {
 	authorized.Use(AuthMiddleware())
 	{
 		authorized.GET("/profile", GetProfile)
-		authorized.OPTIONS("/profile", PreflightHandler) // Add this line
+		authorized.OPTIONS("/profile", PreflightHandler)
 	}
 
 	admin := authorized.Group("/admin")
@@ -61,6 +61,8 @@ func main() {
 	{
 		admin.GET("/users", GetAllUsers)
 		authorized.OPTIONS("/users", PreflightHandler)
+		admin.GET("/warehousemanagers", GetAllWarehouseManagers)
+		authorized.OPTIONS("/warehousemanagers", PreflightHandler)
 	}
 
 	r.Run(":8080")
@@ -186,4 +188,20 @@ func GetProfile(c *gin.Context) {
 func GetAllUsers(c *gin.Context) {
 	log.Printf("GetAllUsers called. Number of users: %d", len(users))
 	c.JSON(http.StatusOK, users)
+}
+
+type WareHouseManager struct {
+	ID      uint   `json:"id"`
+	Name    string `json:"name"`
+	Contact string `json:"contact"`
+}
+
+var wareHouseManagers = []WareHouseManager{
+	{ID: 1, Name: "john doe", Contact: "+44123456789"},
+	{ID: 2, Name: "jane doe", Contact: "+44987654321"},
+}
+
+func GetAllWarehouseManagers(c *gin.Context) {
+	log.Printf("GetAllWarehouseManagers called. Number of warehousemanagers: %d", len(wareHouseManagers))
+	c.JSON(http.StatusOK, wareHouseManagers)
 }
