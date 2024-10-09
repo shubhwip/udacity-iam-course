@@ -1,13 +1,13 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/gin-contrib/cors"
+	"errors"
 	"github.com/dgrijalva/jwt-go"
+	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
 	"net/http"
 	"time"
-	"errors"
 )
 
 var jwtKey = []byte("your_secret_key")
@@ -157,4 +157,19 @@ func GetProfile(c *gin.Context) {
 
 func GetAllUsers(c *gin.Context) {
 	c.JSON(http.StatusOK, users)
+}
+
+type WareHouseManager struct {
+	ID      uint   `json:"id"`
+	name    string `json:"name"`
+	contact string `json:"contact"`
+}
+
+var wareHouseManagers = []WareHouseManager{
+	{ID: 1, name: "john doe", contact: "+44123456789"},
+	{ID: 2, name: "jane doe", contact: "+44987654321"},
+}
+
+func GetAllWarehouseManagers(c *gin.Context) {
+	c.JSON(http.StatusOK, wareHouseManagers)
 }
